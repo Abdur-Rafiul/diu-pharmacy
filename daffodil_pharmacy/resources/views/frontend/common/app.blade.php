@@ -108,7 +108,7 @@
 
                     $('.category').append(
 
-                        "<a href='/categorymedicinedetails/"+dataJSON[i].id+"' class='list-group-item list-group-item-action py-2 ripple' aria-current='true'>"+
+                        "<a href='/category/"+dataJSON[i].id+"' class='list-group-item list-group-item-action py-2 ripple' aria-current='true'>"+
                          "<img class='sidebar-logo' class='me-3' src="+dataJSON[i].category_img+" alt=''><span class='ms-2'>"
                           +dataJSON[i].category_name+
                         "</span></a>"

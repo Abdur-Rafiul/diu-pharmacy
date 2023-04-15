@@ -230,6 +230,16 @@ li{
 /*    background: #0a4e25;*/
 /*}*/
 
+.theImg2{
+    width: 300px!important;
+}
+.theImg1{
+    margin-top: 80px!important;
+    width: 300px!important;
+}
+.theImg3{
+    width: 300px!important;
+}
 
 @media (min-width: 1050px) {
 

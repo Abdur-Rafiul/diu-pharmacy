@@ -9,19 +9,20 @@
 <div class="row mt-5 ml-5">
 
 
-    <div class="col-lg-2 col-md-2">
+    <div class="col-lg-2 col-md-2" style="margin-top: 150px">
 
 
-     <span class="img1">{{$medicine->Medicine_Details->medicine_img1}}</span><br>
-     <span class="img2">{{$medicine->Medicine_Details->medicine_img2}}</span><br>
-     <span class="img3">{{$medicine->Medicine_Details->medicine_img3}}</span><br>
+     <span class="w-50"><img class="img1 theImg1" src="{{$medicine->Medicine_Details->medicine_img1}}" alt=""></span><br>
+     <span class="w-50"><img class="img2 theImg2" src="{{$medicine->Medicine_Details->medicine_img2}}" alt=""></span><br>
+     <span class="w-50"><img class="img3 theImg3" src="{{$medicine->Medicine_Details->medicine_img3}}" alt=""></span><br>
 
 
 
     </div>
-    <div class="col-md-4 col-md-4 mt-5" id="theDivimg">
+    <div class="col-md-4 col-md-4 mt-5">
 
-        {{$medicine->Medicine_Details->medicine_img4}}
+        <img id="" class="w-100 theImg" src="{{$medicine->Medicine_Details->medicine_img4}}" alt="">
+
 
     </div>
 
@@ -99,6 +100,27 @@
 
           </div>
 
+        <div class="row">
+
+            @foreach ($doctor as $doctor)
+            <div class="col-md-4 mt-2">
+                <div class="card" style="width: 18rem;">
+                    <img  src="{{$doctor->img}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-title text-danger">{{$doctor->doctor_name}}</h3>
+                        <h5 class="card-title">Speciality - {{$doctor->Speciality}}</h5>
+                        <h5 class="card-title">Degree - {{$doctor->Degree}}</h5>
+                        <h5 class="card-title">Email - {{$doctor->Email}}</h5>
+                        <h5 class="card-title">Phone - {{$doctor->Phone}}</h5>
+                        <h5 class="card-title">Hospital - {{$doctor->Hospital}}</h5>
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+
 
     </header>
 @endsection
@@ -161,23 +183,24 @@
             $('.img1').click(function (){
 
                 let img1 = $('.theImg1').attr('src');
+                //alert(img1)
 
-                $('#theImg').attr('src',img1);
+                $('.theImg').attr('src',img1);
 
             });
 
             $('.img2').click(function (){
 
                 let img2 = $('.theImg2').attr('src');
-
-                $('#theImg').attr('src',img2);
+               // alert(img2)
+                $('.theImg').attr('src',img2);
 
             })
             $('.img3').click(function (){
 
                 let img3 = $('.theImg3').attr('src');
-
-                $('#theImg').attr('src',img3);
+                //alert(img3)
+                $('.theImg').attr('src',img3);
 
             })
 

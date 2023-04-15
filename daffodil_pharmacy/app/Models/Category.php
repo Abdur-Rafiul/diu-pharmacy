@@ -14,4 +14,9 @@ class Category extends Model
         return $this->hasMany(Medicine_List::class);
     }
 
+    public function doctor()
+    {
+        return $this->belongsToMany(Doctor::class);
+    }
+
 }

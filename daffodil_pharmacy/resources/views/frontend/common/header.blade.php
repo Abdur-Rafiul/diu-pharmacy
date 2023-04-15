@@ -29,12 +29,17 @@
             <a class="nav-link ms-5 navbar-brand" href="#"><h4>Online Pharmacy</h4></a>
             <span class="nav-link navbar-brand"><img class="delivery-logo" src="{{asset('/photo')}}/delivery.png" alt=""> Deliver to Bangladesh</span>
           </li>
+
+
         <!-- Search form -->
-        <form class="d-none d-md-flex input-group w-auto my-auto search-btn">
-          <input autocomplete="off" type="search" class="form-control rounded medicine-search"
+        <form action="{{ route('medicine.search') }}" method="post" class="d-none d-md-flex input-group w-auto my-auto search-btn">
+            @csrf
+          <input autocomplete="off" id="search" name="search" type="search" class="form-control rounded medicine-search"
             placeholder='Search Medicine' style="min-width:210%; padding: 20px" />
-          <span class="input-group-text border-0"><i class="fas fa-search fa-2x"></i></span>
+          <button type="submit" class="input-group-text border-0"><i class="fas fa-search fa-2x"></i></button>
         </form>
+
+
 
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">

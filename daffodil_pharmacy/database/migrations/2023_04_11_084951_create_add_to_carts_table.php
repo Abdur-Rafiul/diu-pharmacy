@@ -37,3 +37,5 @@ class CreateAddToCartsTable extends Migration
         Schema::dropIfExists('add_to_carts');
     }
 }
+
+

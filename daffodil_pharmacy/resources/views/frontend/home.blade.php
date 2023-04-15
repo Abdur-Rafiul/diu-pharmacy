@@ -25,6 +25,8 @@
 
     @include('frontend.personalcare')
     @include('frontend.Vitamin')
+    @include('frontend.Sexualcare')
+    @include('frontend.device')
 
 
 @endsection

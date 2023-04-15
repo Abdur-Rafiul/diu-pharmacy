@@ -5,55 +5,63 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\AddToCart;
 use App\Models\Category;
+use App\Models\Doctor;
 use App\Models\MedicineDetails;
 use App\Models\MedicineList;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function Home(){
-       $category = Category::all();
-       $medicine = MedicineList::all();
-       $personal = MedicineList::where('remark','Personal Care')->get();
-       $vitamin = MedicineList::where('remark','Vitamin')->get();
-       $sexual = MedicineList::where('remark','Sexual Care')->get();
-       $device = MedicineList::where('remark','Device')->get();
-        return view('frontend.home',compact('vitamin', 'sexual','device',
-            'personal','medicine','category'));
+    public function Home()
+    {
+        $category = Category::all();
+        $medicine = MedicineList::all();
+        $personal = MedicineList::where('remark', 'Personal Care')->get();
+        $vitamin = MedicineList::where('remark', 'Vitamin')->get();
+        $sexual = MedicineList::where('remark', 'Sexual Care')->get();
+        $device = MedicineList::where('remark', 'Device')->get();
+        return view('frontend.home', compact('vitamin', 'sexual', 'device',
+            'personal', 'medicine', 'category'));
     }
 
-    public function Category(){
+    public function Category()
+    {
         $category = Category::all();
         return $category;
     }
 
 
-    public function MedicineDetails($id){
+    public function MedicineDetails($id)
+    {
 
         $medicine = MedicineList::find($id);
+        $id = $medicine->category->id;
+        $doctor = Doctor::where('category_id',$id)->get();
 
-        return view('frontend.medicineDetails',compact('medicine'));
+        return view('frontend.medicineDetails', compact('medicine','doctor'));
 
     }
 
-    public function MedicineDetails1(Request $req){
+    public function MedicineDetails1(Request $req)
+    {
 
 
-        $id =  $req->input('id');
+        $id = $req->input('id');
 
-        $medicine= MedicineDetails::where('id','=',$id)->first();
+        $medicine = MedicineDetails::where('id', '=', $id)->first();
 
-        if($medicine){
+        if ($medicine) {
 
             return $medicine;
-        }else{
+        } else {
 
             return 0;
         }
 
     }
 
-    public function AddToCart(Request $req){
+    public function AddToCart(Request $req)
+    {
 
         $mname = $req->input('mname');
         $cname = $req->input('cname');
@@ -73,13 +81,53 @@ class HomeController extends Controller
 
         $medicine->save();
         $count = AddToCart::count();
-        if($count){
+        if ($count) {
             return $count;
 
-        }else{
+        } else {
 
             return 0;
         }
+    }
+
+
+    public function AllMedicine(Request $request)
+    {
+
+        $all_medicine = MedicineList::all();
+
+        return view('frontend.allMedicine',compact('all_medicine'));
+
+    }
+    public function DoctorList(Request $request)
+    {
+
+        $all_doctor = Doctor::all();
+
+        return view('frontend.allDoctor',compact('all_doctor'));
+
+    }
+
+    public function CategoryMedicine($id){
+
+        $category_medicine = MedicineList::where('category_id',$id)->get();
+        return view('frontend.categorymedicine',compact('category_medicine'));
+    }
+
+    public function MedicineSearch(Request $request){
+
+        $medicines = MedicineList::where('medicine_name','LIKE','%'.$request->search."%")
+            ->get();
+
+        if($medicines){
+            return view('frontend.medicinesearch',compact('medicines'));
+
+        }else{
+
+            return redirect()->route('home');
+        }
+
+
     }
 
 }

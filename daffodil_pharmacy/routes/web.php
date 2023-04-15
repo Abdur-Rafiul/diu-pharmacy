@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
-Route::get('/',[HomeController::class,'Home']);
+Route::get('/',[HomeController::class,'Home'])->name('home');
 
 Route::get('/category',[HomeController::class,'Category']);
 Route::get('/medicine/{id}',[HomeController::class,'MedicineDetails'])->name('medicine.details');
@@ -15,6 +15,10 @@ Route::get('/medicine/{id}',[HomeController::class,'MedicineDetails'])->name('me
 Route::post('/MedicineDetails1',[HomeController::class,'MedicineDetails1']);
 
 Route::post('/add-to-cart',[HomeController::class,'AddToCart']);
+Route::get('/AllMedicine',[HomeController::class,'AllMedicine'])->name('all.medicine');
+Route::get('/AllDoctor',[HomeController::class,'DoctorList'])->name('doctor.list');
+Route::get('/category/{id}',[HomeController::class,'CategoryMedicine']);
+Route::post('/search', [HomeController::class, 'MedicineSearch'])->name('medicine.search');
 
 
 //Auth::routes();
