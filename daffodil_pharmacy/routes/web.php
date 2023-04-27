@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\paymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -15,6 +15,8 @@ Route::get('/medicine/{id}',[HomeController::class,'MedicineDetails'])->name('me
 Route::post('/MedicineDetails1',[HomeController::class,'MedicineDetails1']);
 
 Route::post('/add-to-cart',[HomeController::class,'AddToCart']);
+Route::post('/add-to-order',[HomeController::class,'AddToOrder']);
+
 Route::get('/AllMedicine',[HomeController::class,'AllMedicine'])->name('all.medicine');
 Route::get('/AllDoctor',[HomeController::class,'DoctorList'])->name('doctor.list');
 Route::get('/category/{id}',[HomeController::class,'CategoryMedicine']);
@@ -33,3 +35,7 @@ Route::post('/search', [HomeController::class, 'MedicineSearch'])->name('medicin
 //Route::get('/admin/dashboard',function(){
 //    return view('admin');
 //})->middleware('auth:admin');
+
+Route::post('/payment',[paymentController::class,'index']);
+Route::post('/success',[paymentController::class,'success'])->name('success');
+Route::post('/fail',[paymentController::class,'fail'])->name('fail');

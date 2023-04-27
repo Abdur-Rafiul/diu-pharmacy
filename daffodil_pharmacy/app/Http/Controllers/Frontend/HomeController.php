@@ -9,6 +9,9 @@ use App\Models\Doctor;
 use App\Models\MedicineDetails;
 use App\Models\MedicineList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\AddToOrder;
 
 class HomeController extends Controller
 {
@@ -85,6 +88,49 @@ class HomeController extends Controller
             return $count;
 
         } else {
+
+            return 0;
+        }
+    }
+
+    public function AddToOrder(Request $req){
+
+        $mname = $req->input('mname');
+        $cname = $req->input('cname');
+        $img = $req->input('img');
+        $price = $req->input('price');
+        $pharmacy = $req->input('pharmacy');
+        $status = $req->input('status');
+        $address = $req->input('address');
+
+        $delivery_email = $req->input('delivery_email');
+        $phone = $req->input('phone');
+        $fname = $req->input('fname');
+
+        $medicine = new AddToOrder();
+        $medicine->category_name = $cname;
+        $medicine->medicine_name = $mname;
+        $medicine->medicine_img = $img;
+        $medicine->medicine_special_price = $price;
+        $medicine->medicine_price = 0;
+        $medicine->medicine_discount = 0;
+        $medicine->pharmacy = $pharmacy;
+        $medicine->email = "raf@gmail.com";
+
+        $medicine->delivery_email = $delivery_email;
+        $medicine->phone = $phone;
+        $medicine->fname = $fname;
+        $medicine->address = $address;
+        $medicine->status = $status;
+
+        $medicine->save();
+
+
+        // dd($medicine);
+        if($medicine){
+            return 1;
+
+        }else{
 
             return 0;
         }
