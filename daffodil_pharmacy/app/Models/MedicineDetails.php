@@ -14,8 +14,8 @@ class MedicineDetails extends Model
         return $this->belongsTo(MedicineList::class);
     }
 
-//    public function pharmacy()
-//    {
-//        return $this->belongsToMany(Pharmacy::class);
-//    }
+    public function pharmacy()
+    {
+        return $this->hasMany(Pharmacy::class);
+    }
 }

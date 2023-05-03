@@ -9,8 +9,8 @@ class Pharmacy extends Model
 {
     use HasFactory;
 
-    public function pharmacy()
+    public function medicineDetails()
     {
-        return $this->hasManyThrough(Pharmacy::class, MedicineDetails::class);
+        return $this->belongsTo(MedicineDetails::class);
     }
 }

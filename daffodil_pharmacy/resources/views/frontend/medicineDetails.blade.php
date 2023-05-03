@@ -12,9 +12,9 @@
     <div class="col-lg-2 col-md-2" style="margin-top: 70px">
 
 
-     <span class="w-50"><img class="img1 theImg1" src="{{$medicine->Medicine_Details->medicine_img1}}" alt=""></span><br>
-     <span class="w-50"><img class="img2 theImg2" src="{{$medicine->Medicine_Details->medicine_img2}}" alt=""></span><br>
-     <span class="w-50"><img class="img3 theImg3" src="{{$medicine->Medicine_Details->medicine_img3}}" alt=""></span><br>
+     <span class="w-50 mt-5"><img class="img1 theImg1" src="{{$medicine->Medicine_Details->medicine_img1}}" alt=""></span><br>
+     <span class="w-50 mt-5"><img class="img2 theImg2" src="{{$medicine->Medicine_Details->medicine_img2}}" alt=""></span><br>
+     <span class="w-50 mt-5"><img class="img3 theImg3" src="{{$medicine->Medicine_Details->medicine_img3}}" alt=""></span><br>
 
 
 
@@ -86,7 +86,8 @@
         <div class="delivery">
             <h5 class="mt-3"><i class="fas fa-bicycle fa-2x text-danger"></i> সারা বাংলাদেশ থেকে অর্ডার করা যাবে।</h5>
             <h6><i class="fas fa-notes-medical"></i><span  class="pharmacy_name" style="color: #000000">
-                   {{\App\Models\Pharmacy::find($medicine->id)->name}}
+                    <span class="d-none">{{$id = $medicine->Medicine_Details->pharmacy_id}}</span>
+                 {{\App\Models\Pharmacy::find($id)->name}}
                 </span></h6>
         </div>
 

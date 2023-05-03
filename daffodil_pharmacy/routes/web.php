@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\paymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -39,3 +41,8 @@ Route::post('/search', [HomeController::class, 'MedicineSearch'])->name('medicin
 Route::post('/payment',[paymentController::class,'index']);
 Route::post('/success',[paymentController::class,'success'])->name('success');
 Route::post('/fail',[paymentController::class,'fail'])->name('fail');
+
+
+//Admin Panel
+Route::get('/admin-dashboard', [IndexController::class, 'Index'])->name('admin.dashboard');
+Route::resource('medicine', MedicineController::class);

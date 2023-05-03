@@ -24,7 +24,7 @@ class CreateMedicineDetailsTable extends Migration
             $table->string('medicine_box')->nullable();
             $table->string('medicine_pis')->nullable();
             $table->string('medicine_status')->nullable();
-            $table->string('medicine_stock')->nullable();
+            $table->enum('medicine_stock', ['available', 'not available', 'rejected'])->default('available');
             $table->string('medicine_price');
             $table->string('medicine_discount');
             $table->string('medicine_description')->nullable();
