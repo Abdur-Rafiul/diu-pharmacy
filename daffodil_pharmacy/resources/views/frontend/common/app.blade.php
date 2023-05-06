@@ -82,7 +82,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{{asset('js/zoomsl.js')}}"></script>
 
-
+@yield('script')
 <script>
     $(document).ready(function (){
         $('#theImg').imagezoomsl({
@@ -91,14 +91,14 @@
     })
 </script>
 
-@yield("script")
+
 
 
 
     <script>
 
         //alert(1);
-        axios.get('/category', {
+        axios.get('/category1', {
 
         })
             .then(function (response) {
@@ -120,23 +120,23 @@
                 console.log(error);
             });
 
-        axios.get('/count', {
-
-
-
-        })
-            .then(function (response) {
-                const data = response.data;
-
-                $('.count').html(data);
-                alert(data)
-
-
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // axios.get('/count', {
+        //
+        //
+        //
+        // })
+        //     .then(function (response) {
+        //         const data = response.data;
+        //
+        //         $('.count').html(data);
+        //         alert(data)
+        //
+        //
+        //
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
     </script>
 

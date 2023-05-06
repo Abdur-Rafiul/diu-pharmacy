@@ -19,7 +19,7 @@
 
 
     </div>
-    <div class="col-md-4 col-md-4 " style="margin-top: 200px">
+    <div class="col-md-4 col-md-4 " style="margin-top: 300px">
 
         <img id="theImg" class="w-100 theImg" src="{{$medicine->Medicine_Details->medicine_img4}}" alt="">
 
@@ -56,6 +56,7 @@
                         </div>
 
                         <h6 id="h6" class="medicine_price1"><b>TK</b> <del class="medicine_price"></del></h6></b>
+                        <input class="medicine_special_price1 d-none"  name="price" type="text" value="">
 
 
                         <b><h6 id="h6" class="medicine_special_price"></h6></b>
@@ -85,9 +86,9 @@
 
         <div class="delivery">
             <h5 class="mt-3"><i class="fas fa-bicycle fa-2x text-danger"></i> সারা বাংলাদেশ থেকে অর্ডার করা যাবে।</h5>
-            <h6><i class="fas fa-notes-medical"></i><span  class="pharmacy_name" style="color: #000000">
+            <h6><i class="fas fa-notes-medical"></i><span  class="" style="color: #000000">
                     <span class="d-none">{{$id = $medicine->Medicine_Details->pharmacy_id}}</span>
-                 {{\App\Models\Pharmacy::find($id)->name}}
+                <span class="pharmacy_name">{{\App\Models\Pharmacy::find($id)->name}}</span>
                 </span></h6>
         </div>
 
@@ -129,7 +130,7 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form name="payment" id="payment" method="post" action="{{url('/payment')}}">
+            <form name="payment" id="payment" method="post" action="{{route('payment')}}">
                 @csrf
                 <div class="modal-content">
 
@@ -159,7 +160,7 @@
 
                             <input class="d-none" name="mname" type="text" value="{{$medicine->medicine_name}}">
                             <input class="d-none" name="cname" type="text" value="{{$medicine->category->category_name}}">
-                            <input class="pharmacy_name1 d-none" name="pharmacy" type="text" value="">
+                            <input class="pharmacy_name1 d-none" name="pharmacy" type="text" value="{{\App\Models\Pharmacy::find($id)->name}}">
                             <input class="d-none" id="imgrobin" name="img" type="text" value="">
                             <input class="medicine_special_price1 d-none"  name="price" type="text" value="">
 
@@ -196,9 +197,9 @@
 
             $('.box option').prop("selected", true);
 
-            let medicine_price =  parseInt($('.discount1').html());
-            let medicine_discount = parseInt($('.medicine_price').html());
-            //alert(medicine_discount)
+            let medicine_discount  =  parseInt($('.discount1').html());
+            let  medicine_price = parseInt($('.medicine_price').html());
+           // alert(medicine_discount)
 
             let box_count = $('.box_count').html();
 
@@ -206,16 +207,18 @@
 
             discount = discount * 0.01 ;
 
-            discount = discount * medicine_price;
+            discount1 = discount * medicine_price;
             let pis = $(".pis option:selected").val();
 
+            //alert(pis)
             let price = medicine_price - discount;
 
             let price1 = price / box_count;
 
             // alert(box_count);
 
-            $('.medicine_special_price').html('Special Price '+pis * price+' TK');
+            $('.medicine_special_price').html('Special Price '+pis * discount1+' TK');
+            $('.medicine_special_price1').val('Special Price '+pis * discount1+' TK');
 
         });
 
@@ -223,8 +226,8 @@
 
             $('.pis option').prop("selected", false);
 
-            let medicine_price =  $('.discount1').html();
-            let medicine_discount = $('.medicine_price').html();
+            let medicine_discount =  $('.discount1').html();
+            let  medicine_price = $('.medicine_price').html();
 
             let box_count = $('.box_count').html();
 
@@ -235,12 +238,14 @@
             discount = discount * medicine_price;
             let box = $(".box option:selected").val();
 
-            let price = medicine_price - discount;
+            //let price = medicine_price - discount;
 
-            let price1 = price / box_count;
+            let price1 = discount / box_count;
            // alert(box_count)
 
-            $('.medicine_special_price').html('Special Price '+box * price+' TK');
+            $('.medicine_special_price').html('Special Price '+box*box_count * discount+' TK');
+            $('.medicine_special_price1').val('Special Price '+box*box_count * discount+' TK');
+
 
         });
 
@@ -305,7 +310,7 @@
                          let medicine_pis = parseInt(jsonData.medicine_pis);
                          let medicine_box = parseInt(jsonData.medicine_box);
 
-                        // alert(medicine_pis);
+                         //alert(medicine_box);
 
                         if(medicine_pis >= 1){
                             for (i = 10; i <= medicine_pis; i = i + 5){
@@ -350,9 +355,10 @@
 
 
 
-                        $('.medicine_special_price').html('Special Price '+price+' TK');
+                        $('.medicine_special_price').html('Special Price '+discount+' TK');
+                        $('.medicine_special_price1').val('Special Price '+discount+' TK');
 
-                        $('.box_count').html(jsonData.box_count);
+                        $('.box_count').html(medicine_box);
                     }else{
 
 
@@ -479,6 +485,47 @@
 
             // $('.modal').modal('hide');
         })
+
+
+
+        $('.add-to-cart').click(function(){
+
+
+            const img = $('#theImg').attr('src');
+            const mname = $('.medicineName').html();
+            const cname = $('.categoryName').html();
+            const price = $('.medicine_special_price').html();
+            const pharmacy = $('.pharmacy_name').html();
+
+
+            axios.post('/add-to-cart', {
+
+                mname : mname,
+                cname : cname,
+                img : img,
+                price : price,
+                pharmacy: pharmacy
+
+            })
+                .then(function (response) {
+                    const data = response.data;
+
+                    if(data > 0){
+                        alert('Successfully Add To Cart')
+                    }else{
+                        alert('Failed Add To Cart')
+                    }
+                    window.location = '/';
+
+
+
+                })
+                .catch(function (error) {
+                    alert('Failed Add To Cart')
+                    console.log(error);
+                });
+        })
+
     </script>
 @endsection
 

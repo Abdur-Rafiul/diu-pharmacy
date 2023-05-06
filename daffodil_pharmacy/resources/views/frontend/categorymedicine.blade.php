@@ -4,9 +4,9 @@
 @section('content')
 
     <div class="row">
+
         @foreach ($category_medicine as $personal)
             <div class="col-md-3 mt-5">
-
                 <div class="item">
 
                     <div class="card  border border-info shadow-0 mt-5">
@@ -27,7 +27,7 @@
                                 <p>
 
                                     <a class="discount btn-danger" href="">{{ $personal->Medicine_Details->medicine_discount }}% off</a>
-                                    <span><b>TK</b> <del>{{ $personal->Medicine_Details->medicine_price }}</del></span><br>
+                                    {{--                            <span><b>TK</b> <del>{{ $personal->Medicine_Details->medicine_price }}</del></span><br>--}}
                                     <span><b>TK {{ $personal->Medicine_Details->medicine_price}}</b> </span><br>
                                     <span class="discount mt-2 mb-2"><b>Stock {{ $personal->Medicine_Details->medicine_stock}}</b> </span><br>
 
@@ -36,17 +36,20 @@
 
                             </div>
 
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-dark medicine1_card" type="button"><a  style="color: white;" href="#!" class="text-center">Add To Cart</a></button>
+                            {{--                    <div class="d-grid gap-2">--}}
+                            {{--                        <button class="btn btn-dark medicine1_card" type="button"><a  style="color: white;" href="#!" class="text-center">Add To Cart</a></button>--}}
 
-                            </div>
+                            {{--                    </div>--}}
                         </a>
                     </div>
 
-                </div>
 
+                </div>
             </div>
-        @endforeach
+                @endforeach
+
+
+
     </div>
 
 @endsection

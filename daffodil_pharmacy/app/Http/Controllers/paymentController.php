@@ -14,7 +14,7 @@ class paymentController extends Controller
         $url = 'https://sandbox.aamarpay.com/request.php'; // live url https://secure.aamarpay.com/request.php
         $fields = array(
             'store_id' => 'aamarpaytest', //store id will be aamarpay,  contact integration@aamarpay.com for test/live id
-            'amount' => 100, //transaction amount
+            'amount' => '1000', //transaction amount
             'payment_type' => 'VISA', //no need to change
             'currency' => 'BDT',  //currenct will be USD/BDT
             'tran_id' => rand(1111111,9999999), //transaction id must be unique from your end
@@ -22,7 +22,7 @@ class paymentController extends Controller
             'cus_email' => $request->email, //customer email address
             'cus_add1' => $request->address,  //customer address
             'mname' => $request->mname,
-            'cname' => $request->cname,
+            'cname' => $request->pharmacy,
             'img' => $request->img,
             'cus_add2' => 'Mohakhali DOHS', //customer address
             'cus_city' => 'Dhaka',  //customer city
@@ -32,7 +32,7 @@ class paymentController extends Controller
             'cus_phone' => $request->phone, //customer phone number
             'cus_fax' => 'Not¬Applicable',  //fax
             'ship_name' => 'ship name', //ship name
-            'ship_add1' => 'House B-121, Road 21',  //ship address
+            'ship_add1' => $request->pharmacy,  //ship address
             'ship_add2' => 'Mohakhali',
             'ship_city' => 'Dhaka',
             'ship_state' => 'Dhaka',
@@ -44,8 +44,9 @@ class paymentController extends Controller
             'cancel_url' => 'http://localhost/foldername/cancel.php', //your cancel url
             'opt_a' => $request->address,  //optional paramter
             'opt_b' => $request->mname,
-            'opt_c' => 'e',
+            'opt_c' => $request->price,
             'opt_d' => $request->img,
+            'opt_e' => $request->pharmacy,
 
             'signature_key' => 'dbb74894e82415a2f7ff0ec3a97e4183'); //signature key will provided aamarpay, contact integration@aamarpay.com for test/live signature key
 
@@ -90,8 +91,8 @@ class paymentController extends Controller
         $mname = $req->opt_b;
 
         $img = $req->opt_d;
-        $price = $req->amount;
-        $pharmacy = $req->opt_c;
+        $price = $req->opt_c;
+        $pharmacy = 'Tamim';
         $status = '2';
         $address = $req->opt_a;
 
@@ -104,7 +105,6 @@ class paymentController extends Controller
         $medicine->medicine_name = $mname;
         $medicine->medicine_img = $img;
         $medicine->medicine_special_price = $price;
-        $medicine->medicine_price = 0;
         $medicine->medicine_price = 0;
         $medicine->medicine_discount = 0;
         $medicine->pharmacy = $pharmacy;

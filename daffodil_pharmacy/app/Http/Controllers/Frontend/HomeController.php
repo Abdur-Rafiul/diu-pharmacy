@@ -19,12 +19,15 @@ class HomeController extends Controller
     {
         $category = Category::all();
         $medicine = MedicineList::all();
-        $personal = MedicineList::where('remark', 'Personal Care')->get();
+        $personals = MedicineList::where('remark', 'Personal Care')->get();
+        //dd($personal);
         $vitamin = MedicineList::where('remark', 'Vitamin')->get();
         $sexual = MedicineList::where('remark', 'Sexual Care')->get();
         $device = MedicineList::where('remark', 'Device')->get();
+
+        //dd($sexual);
         return view('frontend.home', compact('vitamin', 'sexual', 'device',
-            'personal', 'medicine', 'category'));
+            'personals', 'medicine', 'category'));
     }
 
     public function Category()
