@@ -27,7 +27,7 @@ class CreateMedicineDetailsTable extends Migration
             $table->enum('medicine_stock', ['available', 'not available', 'rejected'])->default('available');
             $table->string('medicine_price');
             $table->string('medicine_discount');
-            $table->string('medicine_description')->nullable();
+            $table->text('medicine_description')->nullable();
             $table->timestamps();
         });
     }

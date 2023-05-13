@@ -1,4 +1,4 @@
-<h3 class="text-center mt-5">Personal Care</h3>
+<h3 class="text-center mt-5">Device</h3>
 <h6 class="text-center text-danger">Someone Exclusive Medicine</h6>
 <div class="owl-slider owl-carousel owl-theme mt-3" >
 

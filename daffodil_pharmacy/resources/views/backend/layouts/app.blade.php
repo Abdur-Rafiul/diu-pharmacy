@@ -21,9 +21,9 @@
 <div   class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div style="background-color: black"  class="" id="sidebar-wrapper">
-        <div class="sidebar-heading  py-2 primary-text fs-4 fw-bold border-bottom">Samira Pharmacy</div>
+        <div class="sidebar-heading  py-2 text-white fs-4 fw-bold border-bottom">Samira Pharmacy</div>
         <div class="list-group list-group-flush my-3">
-            <a href="" class="list-group-item list-group-item-action bg-transparent second-text "><i
+            <a href="{{route('admin.dashboard')}}" class="list-group-item list-group-item-action bg-transparent second-text "><i
                     class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{route('category.index')}}" class="basha_list list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fa-solid fa-building me-2"></i>Category List</a>
             <a href="{{route('pharmacy.index')}}" class="basha_list list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fa-solid fa-building me-2"></i>Pharmacy List</a>
@@ -32,11 +32,10 @@
                     class="fas fa-chart-line me-2"></i>Medicine List</a>
             <a href="{{route('order.index')}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-chart-line me-2"></i>Order List</a>
-            <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="{{route('user.list')}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-paperclip me-2"></i>User List</a>
 
-            <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-paperclip me-2"></i>Feedback</a>
+
 
         </div>
     </div>
@@ -60,17 +59,7 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="">{{ __('Login') }}</a>
-                            </li>
-                        @endif
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="">{{ __('Register') }}</a>
-                            </li>
-                        @endif
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -78,13 +67,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href=""
+                                <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>

@@ -108,7 +108,7 @@ class paymentController extends Controller
         $medicine->medicine_price = 0;
         $medicine->medicine_discount = 0;
         $medicine->pharmacy = $pharmacy;
-        $medicine->email = 'r';
+        $medicine->email = 'Samira@gmail.com';
 
         $medicine->delivery_email = $delivery_email;
         $medicine->phone = $phone;

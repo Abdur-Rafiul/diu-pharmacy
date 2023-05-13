@@ -8,12 +8,14 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\PharmacyController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
+Auth::routes();
 
-Route::get('/',[HomeController::class,'Home'])->name('home');
+Route::get('/',[HomeController::class,'Home'])->name('home.index');;
 
 Route::get('/category1',[HomeController::class,'Category']);
 Route::get('/medicine/{id}',[HomeController::class,'MedicineDetails'])->name('medicine.details');
@@ -37,10 +39,10 @@ Route::post('/admin',[LoginController::class,'adminLogin'])->name('admin.login')
 Route::get('/admin/register',[RegisterController::class,'showAdminRegisterForm'])->name('admin.register-view');
 Route::post('/admin/register',[RegisterController::class,'createAdmin'])->name('admin.register');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/dashboard',function(){
-    return view('admin');
-})->middleware('auth:admin');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/admin/dashboard',function(){
+//    return view('admin');
+//})->middleware('auth:admin');
 
 Route::post('/payment',[paymentController::class,'index'])->name('payment');
 Route::post('/success',[paymentController::class,'success'])->name('success');
@@ -48,9 +50,19 @@ Route::post('/fail',[paymentController::class,'fail'])->name('fail');
 
 
 //Admin Panel
-Route::get('/admin-dashboard', [IndexController::class, 'Index'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [IndexController::class, 'Index'])->name('admin.dashboard');
 Route::resource('medicine', MedicineController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('pharmacy', PharmacyController::class);
 Route::resource('doctor', DoctorController::class);
 Route::resource('order', OrderController::class);
+Route::get('user/list', [IndexController::class, 'user'])->name('user.list');
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');

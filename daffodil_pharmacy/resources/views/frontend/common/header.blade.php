@@ -71,7 +71,18 @@
 
                         @auth
                             <li>
-                            <a href="{{ url('/dashboard') }}" class="dropdown-item">Profile</a>
+{{--                            <a href="{{ url('/dashboard') }}" class="dropdown-item">Dashboard</a>--}}
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         @else
                             <li>
@@ -80,28 +91,30 @@
 
                             @if (Route::has('register'))
                                 <li>
-                                <a href="{{ route('register') }}" class="dropdown-item">Register</a>
+                                <a href="{{ route('admin.register-view') }}" class="dropdown-item">Register</a>
                                 </li>
                             @endif
                         @endauth
 
+
+
                 @endif
-              <li>
-                <a class="dropdown-item" href="#">Some news</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Another news</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
+{{--              <li>--}}
+{{--                <a class="dropdown-item" href="#">Some news</a>--}}
+{{--              </li>--}}
+{{--              <li>--}}
+{{--                <a class="dropdown-item" href="#">Another news</a>--}}
+{{--              </li>--}}
+{{--              <li>--}}
+{{--                <a class="dropdown-item" href="#">Something else here</a>--}}
+{{--              </li>--}}
             </ul>
           </li>
 
           <!-- Icon -->
           <li class="nav-item">
             <a class="nav-link me-3 me-lg-0" href="#">
-                <img class="cart-logo" src="{{asset('/photo')}}/cart.png" alt="">
+{{--                <img class="cart-logo" src="{{asset('/photo')}}/cart.png" alt="">--}}
             </a>
           </li>
 

@@ -15,6 +15,12 @@ use App\Models\AddToOrder;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function Home()
     {
         $category = Category::all();
@@ -54,7 +60,7 @@ class HomeController extends Controller
 
         $id = $req->input('id');
 
-        $medicine = MedicineDetails::where('id', '=', $id)->first();
+        $medicine = MedicineDetails::where('medicine_list_id', '=', $id)->first();
 
         if ($medicine) {
 

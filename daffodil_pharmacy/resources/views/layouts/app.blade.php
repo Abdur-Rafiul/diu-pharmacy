@@ -1,83 +1,148 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- owl carousel slider CSS --}}
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+    {{-- Material Design Bootstrap CDN --}}
+    <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- Fontawesome icon CDN --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>@yield('title')
+    </title>
+
+
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
 
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+<div class="container-fluid">
+    @include('frontend.common.header')
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+    <div class="row">
+        <div class="col-md-2">
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white navbar-control">
+                <div class="position-sticky">
+                    <div class="list-group list-group-flush mx-3 mt-4">
+                        <div class="category_one">
+                            <div class="category">
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
+        <div class="col-md-1 col-lg-1">
 
-        <main class="py-4">
+        </div>
+        <div class="col-md-8" style="margin-top: 150px">
             @yield('content')
-        </main>
+            @include('frontend.common.footer')
+        </div>
+        <div class="col-md-1 col-lg-1">
+
+        </div>
+
     </div>
+</div>
+
+
+
+{{-- jQuery CDN --}}
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/axios.min.js')}}"></script>
+{{-- Material Design Bootstrap CDN --}}
+<script src="{{asset('js/mdb.min.js')}}"></script>
+
+{{-- owl carousel slider js --}}
+<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+
+
+<script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{asset('js/zoomsl.js')}}"></script>
+
+@yield('script')
+<script>
+    $(document).ready(function (){
+        $('#theImg').imagezoomsl({
+            zoomrange: [3,3]
+        });
+    })
+</script>
+
+
+
+
+
+<script>
+
+    //alert(1);
+    axios.get('/category1', {
+
+    })
+        .then(function (response) {
+            const dataJSON = response.data;
+
+            $.each(dataJSON, function (i, item) {
+
+                $('.category').append(
+
+                    "<a href='/category/"+dataJSON[i].id+"' class='list-group-item list-group-item-action py-2 ripple' aria-current='true'>"+
+                    "<img class='sidebar-logo' class='me-3' src="+dataJSON[i].category_img+" alt=''><span class='ms-2'>"
+                    +dataJSON[i].category_name+
+                    "</span></a>"
+
+                );
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    // axios.get('/count', {
+    //
+    //
+    //
+    // })
+    //     .then(function (response) {
+    //         const data = response.data;
+    //
+    //         $('.count').html(data);
+    //         alert(data)
+    //
+    //
+    //
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+
+</script>
+
+
+
+
 </body>
+
 </html>

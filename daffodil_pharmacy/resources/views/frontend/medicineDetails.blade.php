@@ -34,7 +34,7 @@
                         <h4 id="h4" class="medicineName mt-2">{{$medicine->medicine_name}}</h4>
                         <h4 id="h4" class="medicineId d-none">{{$medicine->id}}</h4>
                         <h4 id="h4" class="categoryName d-none">{{$medicine->category->category_name}}</h4>
-                        <span id="h4" class="box_count "></span>
+                        <span id="h4" class="box_count d-none"></span>
                         <p class="text-danger" href="">Get <span class="discount1"></span> % OFF</p>
 
                         <div class="d-flex mb-2">
@@ -55,7 +55,7 @@
 
                         </div>
 
-                        <h6 id="h6" class="medicine_price1"><b>TK</b> <del class="medicine_price"></del></h6></b>
+                        <h6 id="h6" class="medicine_price1 d-none"><b>TK</b> <del class="medicine_price"></del></h6></b>
                         <input class="medicine_special_price1 d-none"  name="price" type="text" value="">
 
 
@@ -167,7 +167,7 @@
                             <label class="form-check-label text-primary" for="inlineRadio1">Name</label>
                             <input name="fname" class="fname" type="text" placeholder="Please Enter Your Full Name">
                             <label class="form-check-label text-primary" for="inlineRadio1">Email</label>
-                            <input readonly name="email" class="email"  type="text" value="rafiul15@gmail.com" placeholder="Enter Your Email">
+                            <input readonly name="email" class="email"  type="text" value="{{\Illuminate\Support\Facades\Auth::user()->email}}" placeholder="Enter Your Email">
                             <label class="form-check-label text-primary" for="inlineRadio1">Phone </label>
                             <input name="phone" class="phone" type="text" placeholder="Please Enter Your Phone Number">
                             <label class="form-check-label text-primary" for="inlineRadio1">Address : </label>
@@ -190,6 +190,7 @@
 @section('script')
     <script type="text/javascript">
 
+        $(document).ready(function () {
 
 
 
@@ -208,6 +209,7 @@
             discount = discount * 0.01 ;
 
             discount1 = discount * medicine_price;
+            let main_price = medicine_price/discount1;
             let pis = $(".pis option:selected").val();
 
             //alert(pis)
@@ -217,8 +219,9 @@
 
             // alert(box_count);
 
-            $('.medicine_special_price').html('Special Price '+pis * discount1+' TK');
-            $('.medicine_special_price1').val('Special Price '+pis * discount1+' TK');
+            $('.medicine_special_price').html('Special Price '+(pis * discount1).toFixed(2)+' TK');
+            $('.medicine_special_price1').html('Special Price '+(pis * discount1).toFixed(2)+' TK');
+            //$('.medicine_price').val(main_price);
 
         });
 
@@ -243,8 +246,8 @@
             let price1 = discount / box_count;
            // alert(box_count)
 
-            $('.medicine_special_price').html('Special Price '+box*box_count * discount+' TK');
-            $('.medicine_special_price1').val('Special Price '+box*box_count * discount+' TK');
+            $('.medicine_special_price').html('Special Price '+(box*box_count * discount).toFixed(2)+' TK');
+            $('.medicine_special_price1').html('Special Price '+(box*box_count * discount).toFixed(2)+' TK');
 
 
         });
@@ -277,7 +280,7 @@
             const id =  $('.medicineId ').html();
 
 
-            //alert(medicineName + categoryName);
+           // alert(id);
 
             axios.post('/MedicineDetails1',{
                 id:id,
@@ -291,7 +294,7 @@
 
                         var jsonData = response.data;
 
-
+                        console.log(jsonData)
 
                         $('.discount1').html(+jsonData.medicine_discount);
                         $('.medicine_price').html(+jsonData.medicine_price);
@@ -525,7 +528,7 @@
                     console.log(error);
                 });
         })
-
+        });
     </script>
 @endsection
 

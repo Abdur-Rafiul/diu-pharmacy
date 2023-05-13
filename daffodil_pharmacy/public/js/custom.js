@@ -45,9 +45,7 @@ $(window).on('resize', function () {
 })
 
 
-$(document).ready(function () {
-    $('#rooms').DataTable();
-});
+
 
 
 document.addEventListener('DOMContentLoaded', () => {

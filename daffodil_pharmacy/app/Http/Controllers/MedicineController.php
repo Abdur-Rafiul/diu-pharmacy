@@ -7,6 +7,7 @@ use App\Models\MedicineDetails;
 use App\Models\MedicineList;
 use App\Models\Pharmacy;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class MedicineController extends Controller
 {
